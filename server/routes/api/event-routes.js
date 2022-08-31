@@ -4,7 +4,9 @@ const {
   createEvent,
   getSingleEvent,
   updateEvent,
-  deleteEvent
+  deleteEvent,
+  addComment,
+  deleteComment
 } = require('../../controllers/event-controllers');
 
 router
@@ -15,8 +17,15 @@ router
 router
   .route('/:eventId')
   .get(getSingleEvent)
-  // .post()
   .put(updateEvent)
   .delete(deleteEvent)
+
+router
+  .route('/:eventId/comment')
+  .post(addComment)
+
+router
+  .route('/:eventId/comment/:commentId')
+  .delete(deleteComment)
 
 module.exports = router;

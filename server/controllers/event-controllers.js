@@ -63,6 +63,43 @@ const eventControllers = {
       console.log(err)
       res.status(500).json(err)
     }
+  },
+  async addComment({ params, body }, res) {
+    try {
+      const event = await Event.findByIdAndUpdate(
+        params.eventId,
+        { $push: { comments: body } },
+        { new: true }
+      )
+
+      if (!event) {
+        res.status(404).json({ message: 'Unable to locate event' })
+        return;
+      }
+      res.json(event)
+    } catch (err) {
+      console.log(err)
+      res.status(500).json(err)
+    }
+  },
+  async deleteComment({ params }, res) {
+    try {
+      const event = await Event.findByIdAndUpdate(
+        params.eventId,
+        { $pull: { comments: { commentId: params.commentId } } },
+        { new: true }
+      );
+
+      if (!event) {
+        res.status(404).json({ message: 'Unable to locate event' })
+        return
+      }
+
+      res.json(event)
+    } catch (err) {
+      console.log(err)
+      res.status(500).json(err)
+    }
   }
 }
 
