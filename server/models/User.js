@@ -17,13 +17,13 @@ const UserSchema = new Schema({
   },
   password: {
     type: String,
-    required: true
+    required: true,
+    select: false
   }
 })
 
 UserSchema.pre('save', async function () {
   this.password = await bcrypt.hash(this._doc.password, 10)
-  next()
 });
 
 const User = model('User', UserSchema);
