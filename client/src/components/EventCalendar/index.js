@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Calendar from 'react-calendar';
 
+
 function EventCalendar() {
   const [value, setValue] = useState(new Date());
 
@@ -12,12 +13,15 @@ function EventCalendar() {
   }
 
   return (
-    <Calendar
-      onChange={onChange}
-      value={value}
-      calendarType={'US'}
-      view={'month'}
-    />
+      <div className='row justify-content-around'>
+        <Calendar
+          onChange={onChange}
+          value={value}
+          calendarType={'US'}
+          view={'month'}
+          className='col-6'
+        />
+      </div>
   );
 }
 
