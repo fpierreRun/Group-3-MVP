@@ -28,6 +28,52 @@ const userController = {
       console.log(err);
       res.status(500).json(err);
     }
+  },
+  async findSingleUser({ params }, res) {
+    try {
+      const user = await User.findOne({ _id: params.userId})
+      .select('-__v')
+
+      if (!user) {
+        res.status(404).json({ message: 'Unable to locate user' })
+        return
+      }
+      res.json(user);
+
+    } catch (err) {
+      console.log(err)
+      res.status(500).json(err)
+    }
+  },
+  async updateUser({ params, body }, res) {
+    try {
+      const user = await User.findByIdAndUpdate(params.userId, body, { new: true });
+
+      if (!user) {
+        res.status(404).json({ message: 'Unable to locate user' })
+        return
+      }
+      res.json(user)
+
+    } catch (err) {
+      console.log(err)
+      res.status(500).json(err)
+    }
+  },
+  async deleteUser({ params }, res) {
+    try {
+      const user = await User.findByIdAndDelete(params.userId, { new: true })
+
+      if (!user) {
+        res.status(404).json({ message: 'Unable to locate user' })
+        return;
+      }
+
+      res.json({ message: 'User successfully deleted' })
+    } catch (err) {
+      console.log(err)
+      res.status(500).json(err)
+    }
   }
 }
 
