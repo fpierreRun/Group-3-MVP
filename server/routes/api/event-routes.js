@@ -1,6 +1,9 @@
 const router = require('express').Router();
 
-const { validateEvent } = require('../../middleware/validation');
+const { 
+  validateEvent, 
+  validateComment 
+} = require('../../middleware/validation');
 
 const {
   getAllEvents,
@@ -25,7 +28,7 @@ router
 
 router
   .route('/:eventId/comment')
-  .post(addComment)
+  .post(validateComment, addComment)
 
 router
   .route('/:eventId/comment/:commentId')

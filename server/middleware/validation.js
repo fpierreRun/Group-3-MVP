@@ -2,7 +2,8 @@ const {
   createUserSchema, 
   updateUserSchema,
   createEventSchema,
-  updateEventSchema 
+  updateEventSchema,
+  commentSchema 
 } = require('../schemas');
 
 const validateUser = ({ method, body }, res, next) => {
@@ -51,7 +52,19 @@ const validateEvent = ({ method, body }, res, next) => {
   return
 }
 
+const validateComment = ({ body }, res, next) => {
+  const { error } = commentSchema.validate(body)
+
+  if (error) {
+    console.log(error)
+    res.json(error)
+    return
+  }
+  next()
+}
+
 module.exports = { 
   validateUser, 
-  validateEvent 
+  validateEvent,
+  validateComment 
 };
