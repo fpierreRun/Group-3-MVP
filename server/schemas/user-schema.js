@@ -7,6 +7,11 @@ const userSchema = Joi.object().keys({
   email: Joi.string().email().required()
 })  
 
+const updateUserSchema = Joi.object().keys({
+  firstName: Joi.string().min(2).max(15),
+  lastName: Joi.string().min(2).max(25),
+  password: Joi.string().min(8).max(30).regex(/[a-zA-Z0-9]{3,30}/),
+  email: Joi.string().email()
+})
 
-
-module.exports = userSchema;
+module.exports = { userSchema, updateUserSchema };

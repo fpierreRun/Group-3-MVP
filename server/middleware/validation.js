@@ -1,6 +1,6 @@
-const { userSchema } = require('../schemas');
+const { userSchema, updateUserSchema } = require('../schemas');
 
-const validateUser = ({ body }, res, next) => {
+const validateUserCreation = ({ body }, res, next) => {
   const { error } = userSchema.validate(body)
 
   if (error) {
@@ -11,4 +11,15 @@ const validateUser = ({ body }, res, next) => {
   next()
 }
 
-module.exports = { validateUser };
+const validateUserUpdate = ({ body }, res, next) => {
+  const { error } = updateUserSchema.validate(body)
+
+  if (error) {
+    console.log(error)
+    res.json({ error: error })
+    return
+  }
+  next()
+}
+
+module.exports = { validateUserCreation, validateUserUpdate };

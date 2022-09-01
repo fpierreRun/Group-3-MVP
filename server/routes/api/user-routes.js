@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const { validateUser } = require('../../middleware/validation');
+const { validateUserCreation, validateUserUpdate } = require('../../middleware/validation');
 const {
   getAllUsers,
   createUser,
@@ -11,12 +11,12 @@ const {
 router
   .route('/')
   .get(getAllUsers)
-  .post(validateUser, createUser)
+  .post(validateUserCreation, createUser)
 
 router
   .route('/:userId')
   .get(findSingleUser)
-  .put(updateUser)
+  .put(validateUserUpdate, updateUser)
   .delete(deleteUser)
 
 module.exports = router;
