@@ -1,4 +1,7 @@
 const router = require('express').Router();
+
+const { validateEvent } = require('../../middleware/validation');
+
 const {
   getAllEvents,
   createEvent,
@@ -12,12 +15,12 @@ const {
 router
   .route('/')
   .get(getAllEvents)
-  .post(createEvent)
+  .post(validateEvent, createEvent)
 
 router
   .route('/:eventId')
   .get(getSingleEvent)
-  .put(updateEvent)
+  .put(validateEvent, updateEvent)
   .delete(deleteEvent)
 
 router
