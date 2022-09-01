@@ -1,4 +1,5 @@
 const router = require('express').Router()
+const { validateUser } = require('../../middleware/validation');
 const {
   getAllUsers,
   createUser,
@@ -10,7 +11,7 @@ const {
 router
   .route('/')
   .get(getAllUsers)
-  .post(createUser)
+  .post(validateUser, createUser)
 
 router
   .route('/:userId')
