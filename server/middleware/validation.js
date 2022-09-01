@@ -1,25 +1,26 @@
-const { userSchema, updateUserSchema } = require('../schemas');
+const { createUserSchema, updateUserSchema } = require('../schemas');
 
-const validateUserCreation = ({ body }, res, next) => {
-  const { error } = userSchema.validate(body)
+const validateUser = ({ method, body }, res, next) => {
+  if (method === 'POST') {
+    const { error } = createUserSchema.validate(body)
 
-  if (error) {
-    console.log(error)
-    res.json({ error: error })
-    return
+    if (error) {
+      console.log(error)
+      res.json({ error: error })
+      return
+    }
+    next()  
+  } else if (method === 'PUT') {
+    const { error } = updateUserSchema.validate(body)
+
+    if (error) {
+      console.log(error)
+      res.json({ error: error })
+      return
+    }
+    next()
   }
-  next()
+  return
 }
 
-const validateUserUpdate = ({ body }, res, next) => {
-  const { error } = updateUserSchema.validate(body)
-
-  if (error) {
-    console.log(error)
-    res.json({ error: error })
-    return
-  }
-  next()
-}
-
-module.exports = { validateUserCreation, validateUserUpdate };
+module.exports = { validateUser };
