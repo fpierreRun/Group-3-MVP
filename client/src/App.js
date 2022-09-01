@@ -1,15 +1,18 @@
-import logo from './logo.svg';
-import './style.css';
 import EventCalendar from './components/EventCalendar';
+import Header from './components/Header';
 
 import "bootstrap/dist/css/bootstrap.min.css"
+import './style.css';
+
 
 function App() {
   return (
-    <main className='container-fluid'>
-      <EventCalendar></EventCalendar>
-    </main>
-    
+    <>
+      <Header></Header>
+      <main className='container-fluid'>
+        <EventCalendar></EventCalendar>
+      </main>
+    </>
   );
 }
 

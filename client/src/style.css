@@ -116,3 +116,9 @@
 .react-calendar--selectRange .react-calendar__tile--hover {
   background-color: #e6e6e6;
 }
+
+.nav-custom {
+  background: rgb(255,128,0);
+  background: linear-gradient(0deg, rgba(255,128,0,1) 0%, rgba(0,0,0,1) 86%);
+  color: white;
+}
