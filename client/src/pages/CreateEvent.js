@@ -21,6 +21,7 @@ const CreateEventPage = (props) => {
         </Form.Group>
 
         <Form.Group controlId="state">
+        <Form.Label>Select a state</Form.Label>
           <Form.Select>
             <option value="AL">Alabama</option>
             <option value="AK">Alaska</option>
@@ -85,6 +86,8 @@ const CreateEventPage = (props) => {
             // onChange={}
           />
         </Form.Group>
+
+        <Button variant="primary" type="submit">Submit</Button>
 
       </Form>
     </div>
