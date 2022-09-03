@@ -1,16 +1,19 @@
 import React from "react";
 import { Form, Button } from "react-bootstrap"
+import Calendar from "react-calendar";
 
 class EventForm extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       title: '',
+      date: new Date(),
       state: '',
       description: ''
     };
 
     this.handleTitleChange = this.handleTitleChange.bind(this)
+    this.handleDateChange = this.handleDateChange.bind(this)
     this.handleStateChange = this.handleStateChange.bind(this)
     this.handleDescriptionChange = this.handleDescriptionChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -20,6 +23,9 @@ class EventForm extends React.Component {
     this.setState({ title: e.target.value })
   }
 
+  handleDateChange(e) {
+    this.setState({ date: e })
+  }
   handleStateChange(e) {
     this.setState({ state: e.target.value })
   }
@@ -33,6 +39,7 @@ class EventForm extends React.Component {
     console.log(this.state)
     this.setState({
       title: '',
+      date: new Date(),
       state: '',
       description: ''
     })
@@ -40,7 +47,17 @@ class EventForm extends React.Component {
 
   render() {
     return (
+      <>
       <Form onSubmit={this.handleSubmit} method="post">
+        <div className='row justify-content-around m-4'>
+          <Calendar
+            onChange={this.handleDateChange}
+            value={this.state.date}
+            calendarType={'US'}
+            view={'month'}
+            className='col-4'
+          />
+        </div>
 
         <Form.Group controlId="title">
           <Form.Label>Event Title</Form.Label>
@@ -54,6 +71,7 @@ class EventForm extends React.Component {
         <Form.Group controlId="state">
         <Form.Label>Select a state</Form.Label>
           <Form.Select name="title" value={this.state.state} onChange={this.handleStateChange}>
+            <option value="">-- Please Select a State --</option>
             <option value="AL">Alabama</option>
             <option value="AK">Alaska</option>
             <option value="AZ">Arizona</option>
@@ -121,6 +139,7 @@ class EventForm extends React.Component {
         <Button type="submit">Submit</Button>
 
       </Form>
+      </>
     )
   }
 }
