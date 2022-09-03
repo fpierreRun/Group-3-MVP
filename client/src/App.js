@@ -10,6 +10,7 @@ import Header from './components/Header';
 import Home from "./pages/Home"
 import SingleEvent from "./pages/SingleEvent"
 import LoginSignup from "./pages/LoginSingup"
+import CreateEvent from "./pages/CreateEvent";
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<LoginSignup />} />
+            <Route path="/create" element={<CreateEvent />} />
             <Route path="/event">
               <Route path=":id" element={<SingleEvent />} />
             </Route>
