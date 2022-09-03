@@ -1,4 +1,5 @@
 import { Form, Button } from "react-bootstrap"
+import EventCalendar from "../components/EventCalendar"
 
 const CreateEventPage = (props) => {
 
@@ -7,8 +8,10 @@ const CreateEventPage = (props) => {
   }
 
   return (
-    <div>
+    <div  className="text-center">
       <h2>Submit a new event</h2>
+      <h3>Select a day</h3>
+      <EventCalendar></EventCalendar>
       <Form onSubmit={handleEvent} method="post">
 
         <Form.Group controlId="title">
@@ -87,7 +90,7 @@ const CreateEventPage = (props) => {
           />
         </Form.Group>
 
-        <Button variant="primary" type="submit">Submit</Button>
+        <Button type="submit">Submit</Button>
 
       </Form>
     </div>

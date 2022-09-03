@@ -4,7 +4,6 @@ import Container from "react-bootstrap/Container"
 import "bootstrap/dist/css/bootstrap.min.css"
 import './style.css';
 
-import EventCalendar from './components/EventCalendar';
 import Header from './components/Header';
 
 import Home from "./pages/Home"
