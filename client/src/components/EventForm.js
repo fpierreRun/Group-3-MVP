@@ -31,6 +31,11 @@ class EventForm extends React.Component {
   handleSubmit(e) {
     e.preventDefault()
     console.log(this.state)
+    this.setState({
+      title: '',
+      state: '',
+      description: ''
+    })
   }
 
   render() {
@@ -41,14 +46,14 @@ class EventForm extends React.Component {
           <Form.Label>Event Title</Form.Label>
           <Form.Control
             name="title"
-            value={this.state.value}
+            value={this.state.title}
             onChange={this.handleTitleChange}
           />
         </Form.Group>
 
         <Form.Group controlId="state">
         <Form.Label>Select a state</Form.Label>
-          <Form.Select name="title" value={this.state.value} onChange={this.handleStateChange}>
+          <Form.Select name="title" value={this.state.state} onChange={this.handleStateChange}>
             <option value="AL">Alabama</option>
             <option value="AK">Alaska</option>
             <option value="AZ">Arizona</option>
@@ -108,7 +113,7 @@ class EventForm extends React.Component {
           <Form.Control
             name="description"
             as="textarea"
-            value={this.state.value}
+            value={this.state.description}
             onChange={this.handleDescriptionChange}
           />
         </Form.Group>
