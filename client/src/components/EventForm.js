@@ -9,7 +9,8 @@ class EventForm extends React.Component {
       title: '',
       date: new Date(),
       state: '',
-      description: ''
+      description: '',
+      author: 'test'
     };
 
     this.handleTitleChange = this.handleTitleChange.bind(this)
@@ -34,15 +35,28 @@ class EventForm extends React.Component {
     this.setState({ description: e.target.value })
   }
 
-  handleSubmit(e) {
+  async handleSubmit(e) {
     e.preventDefault()
-    console.log(this.state)
-    this.setState({
-      title: '',
-      date: new Date(),
-      state: '',
-      description: ''
+    // console.log(this.state)
+    const event = this.state;
+
+    const response = await fetch('http://localhost:3001/api/event', {
+      method: 'POST',
+      body: JSON.stringify(event),
+      headers: { 'Content-Type': 'application/json'}
     })
+
+    if (response.ok) {
+      this.setState({
+        title: '',
+        date: new Date(),
+        state: '',
+        description: ''
+      })
+      alert('successfully created event')
+      return  
+    }
+    alert('there was an error creating your event')
   }
 
   render() {
