@@ -12,6 +12,8 @@ const Header = (props) => {
           <Nav className="me-auto">
             <Nav.Link href="/">Home</Nav.Link>
             <Nav.Link href="/login">Login</Nav.Link>
+            {/* create link needs to conditionally render if logged in */}
+            <Nav.Link href="/create">Add an event</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
