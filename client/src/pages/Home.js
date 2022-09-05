@@ -1,11 +1,12 @@
 import Calendar from 'react-calendar'
 import { Form } from 'react-bootstrap'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 const HomePage = (props) => {
 
   const [date, setDate] = useState(new Date())
   const [state, setState] = useState("")
+  const [events, setEvents] = useState([])
 
   function selectDate (nextValue) {
     setDate(nextValue)
@@ -18,6 +19,17 @@ const HomePage = (props) => {
 
     console.log(date, state);
   }
+
+  const getEvents = async () => {
+    const query = await fetch( `http://localhost:3001/api/event/`)
+    const dbEventData = await query.json()
+    console.log(dbEventData);
+    setEvents(dbEventData)
+  }
+
+useEffect( ()=> {
+  getEvents()
+}, [])
 
 
   return (
