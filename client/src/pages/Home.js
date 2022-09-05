@@ -17,11 +17,14 @@ const HomePage = (props) => {
   function selectState(e) {
     setState(e.target.value)
 
-    console.log(date, state);
+    const filteredEvents = events.filter( function(el) {
+      return el.state === state
+    })
+    console.log(state, filteredEvents);
   }
 
   const getEvents = async () => {
-    const query = await fetch( `http://localhost:3001/api/event/`)
+    const query = await fetch( `/api/event/`)
     const dbEventData = await query.json()
     console.log(dbEventData);
     setEvents(dbEventData)

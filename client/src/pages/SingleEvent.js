@@ -7,7 +7,7 @@ const EventPage = (props) => {
   let { id } = useParams()
 
   const getEvents = async () => {
-      const query = await fetch( `http://localhost:3001/api/event/${id}`)
+      const query = await fetch( `/api/event/${id}`)
       const dbEventData = await query.json()
       console.log(dbEventData);
       setEvent(dbEventData)

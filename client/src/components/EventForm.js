@@ -40,7 +40,7 @@ class EventForm extends React.Component {
     // console.log(this.state)
     const event = this.state;
 
-    const response = await fetch('http://localhost:3001/api/event', {
+    const response = await fetch('/api/event', {
       method: 'POST',
       body: JSON.stringify(event),
       headers: { 'Content-Type': 'application/json'}
