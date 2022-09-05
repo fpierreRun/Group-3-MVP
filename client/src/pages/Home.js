@@ -1,5 +1,5 @@
 import Calendar from 'react-calendar'
-import { Form } from 'react-bootstrap'
+import { Form, Button } from 'react-bootstrap'
 import { useState, useEffect } from 'react'
 
 const HomePage = (props) => {
@@ -7,6 +7,7 @@ const HomePage = (props) => {
   const [date, setDate] = useState(new Date())
   const [state, setState] = useState("")
   const [events, setEvents] = useState([])
+  const [chosenEvents, setChosenEvents] = useState([])
 
   function selectDate (nextValue) {
     setDate(nextValue)
@@ -17,10 +18,6 @@ const HomePage = (props) => {
   function selectState(e) {
     setState(e.target.value)
 
-    const filteredEvents = events.filter( function(el) {
-      return el.state === state
-    })
-    console.log(state, filteredEvents);
   }
 
   const getEvents = async () => {
@@ -30,9 +27,20 @@ const HomePage = (props) => {
     setEvents(dbEventData)
   }
 
-useEffect( ()=> {
-  getEvents()
-}, [])
+  const displayEvents = async () => {
+
+    const filteredEvents = await events.filter( function(el) {
+      return el.state === state
+    })
+
+    await setChosenEvents(filteredEvents)
+
+    console.log(chosenEvents);
+  }
+
+  useEffect( ()=> {
+    getEvents()
+  }, [])
 
 
   return (
@@ -101,6 +109,10 @@ useEffect( ()=> {
       <option value="WI">Wisconsin</option>
       <option value="WY">Wyoming</option>
       </Form.Select>
+      <Button onClick={displayEvents}>Show Events!</Button>
+        {chosenEvents.map(displayedEvent => (
+          <a key={displayedEvent._id} href={'/event/' + displayedEvent._id}>{displayedEvent.title}</a>
+        ))}
     </main>
   )
 }
