@@ -39,7 +39,8 @@ const EventSchema = new Schema({
   date: {
     // May possibly need to change type to string due to how react-calender formats date value
     type: Date,
-    required: true
+    required: true,
+    get: dateVal => formatDate(dateVal)
   },
   state: {
     type: String,
@@ -50,6 +51,12 @@ const EventSchema = new Schema({
     required: true
   },
   comments: [CommentSchema]
+},
+{
+  toJSON: {
+    getters: true
+  },
+  id: false
 })
 
 const Event = model('Event', EventSchema);
