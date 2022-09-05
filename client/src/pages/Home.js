@@ -31,6 +31,7 @@ const HomePage = (props) => {
 
     const filteredEvents = await events.filter( function(el) {
       return el.state === state
+        
     })
 
     await setChosenEvents(filteredEvents)
