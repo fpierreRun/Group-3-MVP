@@ -1,10 +1,12 @@
+import LoginForm from "../components/LoginForm"
 
 
 const LoginPage = (props) => {
   return (
-    <div>
-      <h1>This is the Login page</h1>
-    </div>
+    <>
+    <LoginForm></LoginForm>
+    <a href="/signup">Signup!</a>
+    </>
   )
 }
 
