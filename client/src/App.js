@@ -10,6 +10,7 @@ import Home from "./pages/Home"
 import SingleEvent from "./pages/SingleEvent"
 import LoginSignup from "./pages/LoginSingup"
 import CreateEvent from "./pages/CreateEvent";
+import Signup from './pages/Signup'
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<LoginSignup />} />
+            <Route path="/signup" element={<Signup />} />
             <Route path="/create" element={<CreateEvent />} />
             <Route path="/event">
               <Route path=":id" element={<SingleEvent />} />
