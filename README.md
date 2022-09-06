@@ -6,7 +6,7 @@
 
 
 ## Description
-A simple online calendar that allows users to view and add events for each hour of the current work day. 
+A simple online calendar that allows users to view and add Halloween events for the month of october
 
 
 
