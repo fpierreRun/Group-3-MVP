@@ -2,24 +2,14 @@ import React, { useState, useEffect } from 'react'
 import { Form, Button, Alert } from 'react-bootstrap'
 
 
-import Auth from '../../utils/auth'
+
+import Auth from '../utils/auth'
 
 const SignupForm = () => {
 
   const [userFormData, setUserFormData] = useState('')
 
   const [validated] = useState(false)
-
-  const [showAlert, setShowAlert] = useState(false)
-
-
-  useEffect(() => {
-    if (error) {
-      setShowAlert(true)
-    } else {
-      setShowAlert(false)
-    }
-  }, [error])
 
   const handleInputChange = (event) => {
     const { name, value } = event.target
@@ -35,28 +25,6 @@ const SignupForm = () => {
       event.stopPropagation()
     }
 
-    try {
-      const response = await fetch('http://localhost:3001/api/user', {
-        method: 'POST',
-        body: JSON.stringify(event),
-        headers: { 'Content-Type': 'application/json'}
-      })
-
-      if (response.ok) {
-        this.setState({
-          title: '',
-          date: new Date(),
-          state: '',
-          description: ''
-        })
-        alert('successfully created event')
-        return  
-      } else
-      alert('there was an error creating your event')
-    } catch (err) {
-      console.log(err)
-    }
-
     setUserFormData({
       firstname: '',
       lastname: '',
@@ -69,14 +37,6 @@ const SignupForm = () => {
   return (
     <>
     <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
-      <Alert
-        dismissible
-        onClose={() => setShowAlert(false)}
-        show={showAlert}
-        variant="danger" >
-          Oh no! Something went wrong ☹️
-      </Alert>
-
       <Form.Group>
         <Form.Label htmlFor='firstname'>First Name</Form.Label>
         <Form.Control
