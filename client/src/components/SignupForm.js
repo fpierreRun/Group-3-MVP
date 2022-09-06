@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Form, Button, Alert } from 'react-bootstrap'
 
-import { ADD_USER } from '../'
 
 import Auth from '../../utils/auth'
 
@@ -13,7 +12,6 @@ const SignupForm = () => {
 
   const [showAlert, setShowAlert] = useState(false)
 
-  const [addUser, { error }] = useMutation(ADD_USER)
 
   useEffect(() => {
     if (error) {
@@ -38,16 +36,30 @@ const SignupForm = () => {
     }
 
     try {
-      const { data } = await addUser({
-        variables: { ...userFormData }
+      const response = await fetch('http://localhost:3001/api/user', {
+        method: 'POST',
+        body: JSON.stringify(event),
+        headers: { 'Content-Type': 'application/json'}
       })
-      console.log(data)
-      Auth.login(data.addUser.token)
+
+      if (response.ok) {
+        this.setState({
+          title: '',
+          date: new Date(),
+          state: '',
+          description: ''
+        })
+        alert('successfully created event')
+        return  
+      } else
+      alert('there was an error creating your event')
     } catch (err) {
       console.log(err)
     }
 
     setUserFormData({
+      firstname: '',
+      lastname: '',
       username: '',
       email: '',
       password: ''
@@ -64,6 +76,34 @@ const SignupForm = () => {
         variant="danger" >
           Oh no! Something went wrong ☹️
       </Alert>
+
+      <Form.Group>
+        <Form.Label htmlFor='firstname'>First Name</Form.Label>
+        <Form.Control
+          type='text'
+          placeholder='Your First Name'
+          name='firstname'
+          onChange={handleInputChange}
+          value={userFormData.firstname}
+          required />
+        <Form.Control.Feedback type='invalid'>
+          First Name is Required...
+        </Form.Control.Feedback>
+      </Form.Group>
+
+      <Form.Group>
+        <Form.Label htmlFor='lastname'>Last Name</Form.Label>
+        <Form.Control
+          type='text'
+          placeholder='Your Last Name'
+          name='lastname'
+          onChange={handleInputChange}
+          value={userFormData.lastname}
+          required />
+        <Form.Control.Feedback type='invalid'>
+          Last Name is Required...
+        </Form.Control.Feedback>
+      </Form.Group>
 
       <Form.Group>
         <Form.Label htmlFor='username'>Username</Form.Label>
@@ -110,6 +150,8 @@ const SignupForm = () => {
       <Button 
         disabled={
           !(
+            userFormData.firstname &&
+            userFormData.lastname &&
             userFormData.username &&
             userFormData.email &&
             userFormData.password
