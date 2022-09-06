@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, } from "react-router-dom"
 import LoginForm from "../components/LoginForm"
-import Signup from './Signup'
+import SignupPage from './Signup'
+import { Container } from "react-bootstrap"
 
 const LoginPage = (props) => {
   return (
