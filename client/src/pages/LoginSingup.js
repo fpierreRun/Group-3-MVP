@@ -5,7 +5,7 @@ const LoginPage = (props) => {
   return (
     <>
     <LoginForm></LoginForm>
-    <a href="/signup">Signup!</a>
+    <a href="/signup">Not registered? Signup!</a>
     </>
   )
 }
