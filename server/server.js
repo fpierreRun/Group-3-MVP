@@ -1,4 +1,5 @@
 const express = require('express')
+const cors = require('cors')
 const path = require('path')
 const db = require('./config/connection')
 
@@ -7,6 +8,7 @@ const PORT = process.env.PORT || 3001;
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(cors())
 
 app.use(require('./routes'));
 
