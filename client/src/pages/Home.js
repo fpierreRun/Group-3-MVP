@@ -12,7 +12,7 @@ const HomePage = (props) => {
   function selectDate (nextValue) {
     setDate(nextValue)
 
-    console.log(date, state);
+    console.log(date.toLocaleDateString('en-US', {year: 'numeric', month: 'long', day: 'numeric' }), state);
   }
 
   function selectState(e) {
@@ -30,7 +30,8 @@ const HomePage = (props) => {
   const displayEvents = async () => {
 
     const filteredEvents = await events.filter( function(el) {
-      return el.state === state
+      return el.state === state &&
+        el.date === date.toLocaleDateString('en-US', {year: 'numeric', month: 'long', day: 'numeric' })
     })
 
     await setChosenEvents(filteredEvents)
