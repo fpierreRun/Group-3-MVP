@@ -3,7 +3,7 @@ import { Form, Button, Alert, Container } from 'react-bootstrap';
 import Cookie from 'js-cookie'
 
 const LoginForm = () => {
-  const [loginCreds, setloginCreds] = useState('')
+  const [loginCreds, setloginCreds] = useState({email: '', password: ''})
   const [ formMessage, setFormMessage ] = useState({ type: "", msg: "" })
 
   const handleInputChange = (e) => {
@@ -26,32 +26,31 @@ const LoginForm = () => {
     } else {
       setFormMessage({ type: 'danger', msg: 'Your credentials are invalid. Please try again.'})
     }
-    setloginCreds({ email: '', password: '' })
   }
 
   return (
     <Container>
       <Form onSubmit={handleLogin}>
-        <Form.Group controlId='email'>
-          <Form.Label>Email Address</Form.Label>
+        <Form.Group>
+          <Form.Label htmlFor='email'>Email Address</Form.Label>
           <Form.Control
-            type='email'
+            type='text'
             name='email'
             placeholder='Enter Your Email'
             value={ loginCreds.email }
-            onchange={handleInputChange}
+            onChange={handleInputChange}
             required
             />
         </Form.Group>
 
         <Form.Group>
-          <Form.Label>Password</Form.Label>
+          <Form.Label htmlFor='password'>Password</Form.Label>
           <Form.Control
-            type='password'
+            type='text'
             name='password'
             placeholder='Enter Your Password'
             value={ loginCreds.password }
-            onchange={handleInputChange}
+            onChange={handleInputChange}
             required
             />
         </Form.Group>
