@@ -55,7 +55,7 @@ const EventPage = (props) => {
         {comments.map(comment => (
           <div key={comment._id}>
             <h5>{comment.author}</h5>
-            <p class="comment">{comment.commentBody}</p>
+            <p id="comment">{comment.commentBody}</p>
           </div>
         ))}
       </div>
