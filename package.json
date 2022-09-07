@@ -1,7 +1,7 @@
 {
   "name": "group-3-mvp",
   "version": "1.0.0",
-  "description": "",
+  "description": "## Team Members  * Chase * Nick * Justice * Dakota * Francis",
   "main": "index.js",
   "scripts": {
     "start": "node server/server.js",
@@ -22,5 +22,6 @@
   "homepage": "https://github.com/fpierreRun/Group-3-MVP#readme",
   "dependencies": {
     "concurrently": "^7.3.0"
-  }
+  },
+  "devDependencies": {}
 }

@@ -1,74 +1,73 @@
 import React, { useState, useEffect } from 'react';
-import { Form, Button, Alert } from 'react-bootstrap';
-
-import LOGIN_USER from '../utils/API'
-import Auth from '../utils/API'
+import { Form, Button, Alert, Container } from 'react-bootstrap';
+import Cookie from 'js-cookie'
 
 const LoginForm = () => {
-  const [userFormData, setUserFormData] = useState({ email: '', password: ''})
-  const [validated] = useState(false)
+  const [loginCreds, setloginCreds] = useState({email: '', password: ''})
+  const [ formMessage, setFormMessage ] = useState({ type: "", msg: "" })
 
-  const handleInputChange = (event) => {
-    const { name, value } = event.target
-    setUserFormData({ ...userFormData, [name]: value})
+  const handleInputChange = (e) => {
+    const { name, value } = e.target
+    setloginCreds({ ...loginCreds, [name]: value})
   }
 
-  const handleFormSubmit = async (event) => {
-    event.preventDefault()
-
-    const form = event.currentTarget
-    if (form.checkValidity() === false) {
-      event.preventDefault()
-      event.stopPropagation()
-    }
-
-
-    setUserFormData({
-      email: '',
-      password: '',
+  const handleLogin = async (e) => {
+    e.preventDefault()
+    const authCheck = await fetch('/api/user/auth', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(loginCreds)
     })
+    const authResult = await authCheck.json()
+
+    if( authResult.result === 'success' ) {
+      Cookie.set('auth-token', authResult.token)
+      setFormMessage({ type: 'success', msg: 'Your Login was Successful! Enjoy!'})
+    } else {
+      setFormMessage({ type: 'danger', msg: 'Your credentials are invalid. Please try again.'})
+    }
   }
 
   return (
-    <>
-      <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
+    <Container>
+      <Form onSubmit={handleLogin}>
         <Form.Group>
-          <Form.Label htmlFor='email'>Email</Form.Label>
+          <Form.Label htmlFor='email'>Email Address</Form.Label>
           <Form.Control
             type='text'
-            placeholder='Your Email'
             name='email'
+            placeholder='Enter Your Email'
+            value={ loginCreds.email }
             onChange={handleInputChange}
-            value={userFormData.email}
-            required />
-          <Form.Control.Feedback type='invalid'>
-            An Email is required to continue
-          </Form.Control.Feedback>
+            required
+            />
         </Form.Group>
 
         <Form.Group>
           <Form.Label htmlFor='password'>Password</Form.Label>
           <Form.Control
-            type='password'
-            placeholder='Your Password'
+            type='text'
             name='password'
+            placeholder='Enter Your Password'
+            value={ loginCreds.password }
             onChange={handleInputChange}
-            value={userFormData.password}
-            required />
-          <Form.Control.Feedback type='invalid'>
-            Password is required to continue.
-          </Form.Control.Feedback>
+            required
+            />
         </Form.Group>
 
         <Button 
-        disabled={!(userFormData.email && userFormData.password)}
-        type='submit'
-        variant='success'>
-          Submit
+          variant='primary' 
+          type='submit'>
+            Login!
         </Button>
       </Form>
-      
-    </>
+
+      {formMessage.msg.length > 0 && (
+        <Alert variant={formMessage.type}>
+          { formMessage.msg }
+        </Alert>
+      )}
+    </Container>
   )
 }
 
