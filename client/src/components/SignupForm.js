@@ -41,7 +41,7 @@ const SignupForm = () => {
 
   return (
     <Container>
-      <Form noValidate validated={validated} onSubmit={handleSignup}>
+      <Form onSubmit={handleSignup}>
         <Form.Group>
           <Form.Label htmlFor='firstname'>First Name</Form.Label>
           <Form.Control
