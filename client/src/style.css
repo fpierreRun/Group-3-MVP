@@ -6,7 +6,7 @@
   border: 1px solid black;
   border-radius: 25px;
   color: #1AA0AD;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: fantasy;
   line-height: 1.125em;
 }
 span {
@@ -125,10 +125,20 @@ span {
   background-color: #e6e6e6;
 }
 
+h1, h2, h3 {
+  font-family: fantasy;
+}
+
+.form-label {
+  font-family: fantasy;
+
+}
+
 .nav-custom {
   background: rgb(2,0,36);
   background: linear-gradient(147deg, rgba(2,0,36,1) 0%, rgba(235,175,79,1) 31%, rgba(118,189,157,1) 65%, rgba(47,224,199,1) 73%, rgba(0,212,255,1) 100%);
   color: white;
+  font-family: fantasy;
 }
 .signup {
   background-color: #1AA0AD;
