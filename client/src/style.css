@@ -4,12 +4,13 @@
   max-height: 100%;
   background: white;
   border: 1px solid black;
+  border-radius: 25px;
   color: #1AA0AD;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: fantasy;
   line-height: 1.125em;
 }
 span {
-  color: #D57013;
+  color: #fab217;
   font-weight: bolder;
   font-size: larger;
   font-style: italic;
@@ -106,26 +107,40 @@ span {
   background: #1AA0AD;
 }
 .react-calendar__tile--hasActive {
-  background: #D57013;
+  background: #fab217;
 }
 .react-calendar__tile--hasActive:enabled:hover,
 .react-calendar__tile--hasActive:enabled:focus {
   background: #a9d4ff;
 }
 .react-calendar__tile--active {
-  background: #D57013;
+  background: #fab217;
   color: white;
 }
 .react-calendar__tile--active:enabled:hover,
 .react-calendar__tile--active:enabled:focus {
-  background: #D57013;
+  background: #fab217;
 }
 .react-calendar--selectRange .react-calendar__tile--hover {
   background-color: #e6e6e6;
 }
 
+h1, h2, h3 {
+  font-family: fantasy;
+}
+
+.form-label {
+  font-family: fantasy;
+
+}
+
 .nav-custom {
-  background: rgb(255,128,0);
-  background: linear-gradient(0deg, rgba(255,128,0,1) 0%, rgba(0,0,0,1) 86%);
+  background: rgb(2,0,36);
+  background: linear-gradient(147deg, rgba(2,0,36,1) 0%, rgba(235,175,79,1) 31%, rgba(118,189,157,1) 65%, rgba(47,224,199,1) 73%, rgba(0,212,255,1) 100%);
   color: white;
+  font-family: fantasy;
+}
+.signup {
+  background-color: #1AA0AD;
+  
 }
