@@ -4,7 +4,9 @@ const {
   createUser,
   findSingleUser,
   updateUser,
-  deleteUser
+  deleteUser,
+  authenticateLogin,
+  lookupUserByToken
 } = require('../../controllers/user-controllers');
 
 router
@@ -17,5 +19,13 @@ router
   .get(findSingleUser)
   .put(updateUser)
   .delete(deleteUser)
+
+router
+  .route('/auth')
+  .post(authenticateLogin)
+
+router
+  .route('/lookup')
+  .get(lookupUserByToken)
 
 module.exports = router;
