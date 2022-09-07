@@ -40,6 +40,7 @@ const LoginForm = () => {
             placeholder='Enter Your Email'
             value={ loginCreds.email }
             onchange={handleInputChange}
+            required
             />
         </Form.Group>
 
@@ -51,10 +52,15 @@ const LoginForm = () => {
             placeholder='Enter Your Password'
             value={ loginCreds.password }
             onchange={handleInputChange}
+            required
             />
         </Form.Group>
 
-        <Button disabled={!(loginCreds.email && loginCreds.password)} variant='primary' type='submit'>Login!</Button>
+        <Button 
+          variant='primary' 
+          type='submit'>
+            Login!
+        </Button>
       </Form>
 
       {formMessage.msg.length > 0 && (

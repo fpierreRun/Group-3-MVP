@@ -6,7 +6,7 @@ import Cookie from 'js-cookie'
 
 const SignupForm = () => {
 
-  const [signupFormData, setsignupFormData] = useState('')
+  const [signupFormData, setsignupFormData] = useState({firstName: '', lastName: '', username: '', email: '', password: ''})
   const [ formMessage, setFormMessage ] = useState({ type: "", msg: "" })
 
   const handleInputChange = (e) => {
@@ -14,42 +14,37 @@ const SignupForm = () => {
     setsignupFormData({ ...signupFormData, [name]: value})
   }
 
-  const handleSignup = async (e) => {
-    e.preDefault()
-    const signup = await fetch('/api/user', {
+  const handleSignup = async (event) => {
+    event.preventDefault()
+    const response = await fetch('/api/user', {
       method: 'POST',
       headers: { 'Content-Type':'application/json'},
       body: JSON.stringify(signupFormData)
     })
-    const signupResult = await signup.json()
-
-    if( signupResult.result === 'success' ) {
-      Cookie.set('auth-token', signupResult.token)
-      setFormMessage({ type: 'success', msg: 'Your Signup Was Successful. Enjoy!' })
-    } else {
-      setFormMessage({ type: 'danger', msg: 'Something went wrong, or is missing. Please try again.'})
+    if (response.ok) {
+      setsignupFormData({
+        firstName: '',
+        lastName: '',
+        username: '',
+        email: '',
+        password: ''
+      })
     }
-    
-    setsignupFormData({
-      firstname: '',
-      lastname: '',
-      username: '',
-      email: '',
-      password: ''
-    })
+    console.log(signupFormData)
+
   }
 
   return (
     <Container>
       <Form onSubmit={handleSignup}>
         <Form.Group>
-          <Form.Label htmlFor='firstname'>First Name</Form.Label>
+          <Form.Label htmlFor='firstName'>First Name</Form.Label>
           <Form.Control
             type='text'
             placeholder='Your First Name'
-            name='firstname'
+            name='firstName'
             onChange={handleInputChange}
-            value={signupFormData.firstname}
+            value={signupFormData.firstName}
             required />
           <Form.Control.Feedback type='invalid'>
             First Name is Required...
@@ -57,13 +52,13 @@ const SignupForm = () => {
         </Form.Group>
 
         <Form.Group>
-          <Form.Label htmlFor='lastname'>Last Name</Form.Label>
+          <Form.Label htmlFor='lastName'>Last Name</Form.Label>
           <Form.Control
             type='text'
             placeholder='Your Last Name'
-            name='lastname'
+            name='lastName'
             onChange={handleInputChange}
-            value={signupFormData.lastname}
+            value={signupFormData.lastName}
             required />
           <Form.Control.Feedback type='invalid'>
             Last Name is Required...
@@ -115,8 +110,8 @@ const SignupForm = () => {
         <Button 
           disabled={
             !(
-              signupFormData.firstname &&
-              signupFormData.lastname &&
+              signupFormData.firstName &&
+              signupFormData.lastName &&
               signupFormData.username &&
               signupFormData.email &&
               signupFormData.password
