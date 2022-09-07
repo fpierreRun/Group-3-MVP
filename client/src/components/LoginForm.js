@@ -3,11 +3,11 @@ import { Form, Button, Alert, Container } from 'react-bootstrap';
 import Cookie from 'js-cookie'
 
 const LoginForm = () => {
-  const [loginCreds, setloginCreds] = useState({ email: '', password: ''})
+  const [loginCreds, setloginCreds] = useState('')
   const [ formMessage, setFormMessage ] = useState({ type: "", msg: "" })
 
-  const handleInputChange = (event) => {
-    const { name, value } = event.target
+  const handleInputChange = (e) => {
+    const { name, value } = e.target
     setloginCreds({ ...loginCreds, [name]: value})
   }
 
