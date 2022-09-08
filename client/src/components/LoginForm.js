@@ -22,7 +22,8 @@ const LoginForm = () => {
 
     if( authResult.result === 'success' ) {
       Cookie.set('auth-token', authResult.token)
-      setFormMessage({ type: 'success', msg: 'Your Login was Successful! Enjoy!'})
+      setFormMessage({ type: 'success', msg: 'Your Login was Successful! Enjoy!'
+      })
     } else {
       setFormMessage({ type: 'danger', msg: 'Your credentials are invalid. Please try again.'})
     }
@@ -46,7 +47,7 @@ const LoginForm = () => {
         <Form.Group>
           <Form.Label htmlFor='password'>Password</Form.Label>
           <Form.Control
-            type='text'
+            type='password'
             name='password'
             placeholder='Enter Your Password'
             value={ loginCreds.password }
