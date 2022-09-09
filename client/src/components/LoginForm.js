@@ -46,7 +46,7 @@ const LoginForm = () => {
         <Form.Group>
           <Form.Label htmlFor='password'>Password</Form.Label>
           <Form.Control
-            type='text'
+            type='password'
             name='password'
             placeholder='Enter Your Password'
             value={ loginCreds.password }
